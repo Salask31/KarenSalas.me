@@ -1,0 +1,2963 @@
+:root {
+  --navy: #0d1b2a;
+  --navy-soft: #132437;
+  --black: #121212;
+  --gray-700: #444444;
+  --gray-300: #d7d7d7;
+  --gray-100: #f5f5f5;
+  --white: #ffffff;
+  --burgundy: #8b1e3f;
+
+  --container: min(92vw, 1540px);
+  --display-xl: clamp(4.4rem, 11vw, 12rem);
+  --heading: clamp(2.5rem, 5vw, 5.75rem);
+  --body-lg: clamp(1.2rem, 1.8vw, 1.8rem);
+  --body: clamp(1rem, 1.1vw, 1.15rem);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--navy);
+  color: var(--white);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: var(--body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--burgundy);
+  outline-offset: 5px;
+}
+
+.container {
+  width: var(--container);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 999;
+  padding: 0.8rem 1rem;
+  background: var(--white);
+  color: var(--black);
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  transition: background 300ms ease, border-color 300ms ease;
+}
+
+.site-header.is-scrolled {
+  background: rgba(13, 27, 42, 0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(14px);
+}
+
+.nav {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.nav-links a {
+  position: relative;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 100%;
+  height: 2px;
+  background: var(--burgundy);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms var(--ease);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+.hero {
+  min-height: 100vh;
+  padding-top: 9rem;
+  display: grid;
+  align-items: center;
+  background: var(--navy);
+}
+
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto 1fr auto;
+  min-height: calc(100vh - 9rem);
+  align-items: end;
+}
+
+.hero__eyebrow {
+  grid-column: 1 / 5;
+  align-self: start;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  color: rgba(255,255,255,0.58);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero__portrait {
+  grid-column: 6 / 12;
+  grid-row: 1 / 4;
+  align-self: stretch;
+  min-height: 72vh;
+  margin: 0;
+  overflow: hidden;
+  background: var(--navy-soft);
+}
+
+.hero__portrait img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  filter: grayscale(100%) contrast(1.05);
+}
+
+.hero__name {
+  grid-column: 1 / 10;
+  grid-row: 2;
+  align-self: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: var(--display-xl);
+  line-height: 0.76;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+}
+
+.hero h1 span {
+  display: block;
+}
+
+.hero h1 span:last-child {
+  margin-left: 0.72em;
+}
+
+.hero__details {
+  grid-column: 1 / 5;
+  grid-row: 3;
+  z-index: 2;
+  padding-bottom: 2.5rem;
+}
+
+.hero__roles {
+  margin: 0 0 1.5rem;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero__tagline {
+  max-width: 21ch;
+  margin: 0 0 2rem;
+  font-size: var(--body-lg);
+  line-height: 1.24;
+  letter-spacing: -0.03em;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.button,
+.text-link {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.74rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.button {
+  padding: 0.85rem 1.2rem;
+  border: 1px solid rgba(255,255,255,0.35);
+  transition: transform 220ms var(--ease), background 220ms ease, color 220ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+.button--secondary {
+  background: transparent;
+}
+
+.text-link {
+  padding-inline: 0.35rem;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.scroll-cue {
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.65rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.scroll-cue__line {
+  position: relative;
+  width: 1px;
+  height: 66px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.25);
+}
+
+.scroll-cue__line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--burgundy);
+  transform: translateY(-100%);
+  animation: scrollLine 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+.about {
+  padding: 10rem 0;
+  background: var(--gray-100);
+  color: var(--black);
+}
+
+.section-heading {
+  display: grid;
+  grid-template-columns: 2fr 8fr 2fr;
+  gap: 2rem;
+  margin-bottom: 7rem;
+}
+
+.section-label {
+  color: var(--burgundy);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-heading h2 {
+  grid-column: 2 / 4;
+  max-width: 14ch;
+  margin: 0;
+  font-size: var(--heading);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.about__portrait {
+  grid-column: 1 / 6;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--gray-300);
+}
+
+.about__portrait img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: grayscale(100%) contrast(1.04);
+}
+
+.about__copy {
+  grid-column: 7 / 12;
+}
+
+.lead {
+  margin-top: 0;
+  font-size: var(--body-lg);
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+
+.about__copy > p:not(.lead) {
+  max-width: 58ch;
+  color: var(--gray-700);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-block: 4rem;
+  padding-block: 2rem;
+  border-top: 1px solid rgba(18,18,18,0.18);
+  border-bottom: 1px solid rgba(18,18,18,0.18);
+}
+
+.stat strong {
+  display: block;
+  color: var(--burgundy);
+  font-size: clamp(3rem, 5vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.stat span {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--gray-700);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.specialties {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(18,18,18,0.18);
+}
+
+.specialties li {
+  padding-block: 1rem;
+  border-bottom: 1px solid rgba(18,18,18,0.18);
+}
+
+.placeholder {
+  min-height: 35vh;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 780ms var(--ease), transform 780ms var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .hero__portrait {
+    grid-column: 5 / 13;
+  }
+
+  .hero__name {
+    grid-column: 1 / 12;
+  }
+}
+
+@media (max-width: 760px) {
+  .nav {
+    min-height: 72px;
+  }
+
+  .nav-links {
+    gap: 1.1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding-top: 7rem;
+  }
+
+  .hero__grid {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    gap: 2rem;
+  }
+
+  .hero__eyebrow {
+    width: 100%;
+  }
+
+  .hero__name {
+    order: 1;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(4rem, 20vw, 8rem);
+  }
+
+  .hero h1 span:last-child {
+    margin-left: 0;
+  }
+
+  .hero__portrait {
+    order: 2;
+    width: 100%;
+    min-height: 58vh;
+  }
+
+  .hero__details {
+    order: 3;
+    width: 100%;
+    padding-bottom: 5rem;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+
+  .section-heading {
+    display: block;
+    margin-bottom: 4rem;
+  }
+
+  .section-heading h2 {
+    margin-top: 1rem;
+  }
+
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__portrait,
+  .about__copy {
+    grid-column: auto;
+  }
+
+  .about__copy {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --container: min(90vw, 1540px);
+  }
+
+  .brand span:last-child {
+    display: none;
+  }
+
+  .nav-links {
+    gap: 0.75rem;
+  }
+
+  .hero__eyebrow {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .hero__portrait {
+    min-height: 52vh;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button,
+  .text-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .stats,
+  .specialties {
+    grid-template-columns: 1fr;
+  }
+
+  .about {
+    padding: 7rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* JOURNEY */
+.journey {
+  position: relative;
+  padding: 10rem 0;
+  background: #f4f4f4;
+  color: var(--black);
+}
+
+.journey__heading {
+  margin-bottom: 5rem;
+}
+
+.timeline {
+  position: relative;
+  max-width: 980px;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.timeline__line {
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 1px;
+  background: rgba(18,18,18,0.14);
+}
+
+.timeline__progress {
+  display: block;
+  width: 100%;
+  height: 0%;
+  background: var(--burgundy);
+  transition: height 180ms linear;
+}
+
+.timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 2.5rem;
+  padding: 0 0 5rem 2.5rem;
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline__dot {
+  position: absolute;
+  left: -5px;
+  top: 0.55rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--black);
+  transition: transform 250ms var(--ease), background 250ms ease;
+}
+
+.timeline__item.is-active .timeline__dot {
+  background: var(--burgundy);
+  transform: scale(1.25);
+}
+
+.timeline__year {
+  color: var(--burgundy);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.timeline__content h3 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.timeline__company {
+  margin: 0.35rem 0 1rem;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+.timeline__content p:last-child {
+  max-width: 58ch;
+  margin: 0;
+  color: var(--gray-700);
+  line-height: 1.7;
+}
+
+/* SERVICES */
+.services {
+  padding: 10rem 0;
+  background: #f5f5f5;
+  color: var(--black);
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(18,18,18,0.16);
+  border-left: 1px solid rgba(18,18,18,0.16);
+}
+
+.service {
+  min-height: 250px;
+  padding: 2rem 1.7rem;
+  border-right: 1px solid rgba(18,18,18,0.16);
+  border-bottom: 1px solid rgba(18,18,18,0.16);
+  background: #fafafa;
+  transition: background 220ms ease, transform 220ms var(--ease);
+}
+
+.service:hover {
+  background: #ffffff;
+  transform: translateY(-3px);
+}
+
+.service__icon {
+  display: inline-block;
+  color: #d9562f;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.service h3 {
+  margin: 3rem 0 0.8rem;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.service p {
+  margin: 0;
+  color: var(--gray-700);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.tools {
+  margin-top: 7rem;
+}
+
+.tools__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2.4rem;
+  margin-top: 1.8rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid rgba(18,18,18,0.16);
+}
+
+.tools__list span {
+  font-size: clamp(1.4rem, 2.6vw, 3.2rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+/* CONTACT */
+.contact {
+  min-height: 78vh;
+  padding: 8rem 0 2rem;
+  background: var(--burgundy);
+  color: var(--white);
+}
+
+.contact__inner {
+  min-height: calc(78vh - 10rem);
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: 1fr auto auto;
+  gap: 3rem 5vw;
+}
+
+.contact__headline h2 {
+  max-width: 10ch;
+  margin: 1.2rem 0 0;
+  font-size: clamp(3.6rem, 8vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.07em;
+}
+
+.contact .section-label {
+  color: rgba(255,255,255,0.68);
+}
+
+.contact__meta {
+  align-self: center;
+  justify-self: end;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact__links {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.28);
+}
+
+.contact__links a {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255,255,255,0.7);
+  font-size: 0.92rem;
+}
+
+.contact__footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  color: rgba(255,255,255,0.52);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__meta {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 620px) {
+  .timeline__item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding-left: 2rem;
+  }
+
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact__footer {
+    flex-direction: column;
+  }
+}
+
+
+/* FINAL SERVICES — DARK VERSION */
+.services--dark {
+  padding: 10rem 0;
+  background: var(--navy);
+  color: var(--white);
+}
+
+.services--dark .section-heading {
+  margin-bottom: 6rem;
+}
+
+.services--dark .section-heading h2 {
+  color: var(--white);
+}
+
+.services--dark .section-label {
+  color: #d9879f;
+}
+
+.services__grid--dark {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-left: 1px solid rgba(255,255,255,0.2);
+}
+
+.service--dark {
+  min-height: 300px;
+  padding: 1.5rem;
+  background: transparent;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  transition: background 240ms ease, transform 240ms var(--ease);
+}
+
+.service--dark:hover {
+  background: rgba(255,255,255,0.045);
+  transform: translateY(-3px);
+}
+
+.service--dark .service__icon {
+  display: inline-block;
+  color: #d9562f;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.service--dark h3 {
+  margin: 5rem 0 1rem;
+  color: var(--white);
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+}
+
+.service--dark p {
+  margin: 0;
+  max-width: 30ch;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.tools--moving {
+  margin-top: 7rem;
+  overflow: hidden;
+}
+
+.tools__viewport {
+  margin-top: 2rem;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.tools__track {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+  white-space: nowrap;
+  font-size: clamp(2.4rem, 5vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.065em;
+  animation: toolsMarquee 30s linear infinite;
+}
+
+.tools__track span::after {
+  content: "•";
+  margin-left: 3.5rem;
+  color: var(--burgundy);
+}
+
+@keyframes toolsMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 900px) {
+  .services__grid--dark {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .services__grid--dark {
+    grid-template-columns: 1fr;
+  }
+
+  .service--dark {
+    min-height: 250px;
+  }
+
+  .service--dark h3 {
+    margin-top: 3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tools__track {
+    width: auto;
+    flex-wrap: wrap;
+    white-space: normal;
+    animation: none;
+    gap: 1rem 2rem;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+  }
+
+  .tools__track span[aria-hidden="true"] {
+    display: none;
+  }
+
+  .tools__track span::after {
+    margin-left: 2rem;
+  }
+}
+
+
+/* SERVICES ICON REFINEMENT */
+.service--dark .service__icon {
+  color: var(--burgundy);
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   CONTACT — MATCHING PROVIDED REFERENCE
+   ========================================================= */
+
+.contact-ref {
+  background: var(--burgundy);
+  color: var(--white);
+}
+
+.contact-ref__main {
+  min-height: 78vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 7vw;
+  align-items: center;
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+.contact-ref__label {
+  display: block;
+  margin-bottom: 1.8rem;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.contact-ref__left h2 {
+  margin: 0;
+  max-width: 9.5ch;
+  font-size: clamp(3.8rem, 7.1vw, 7.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+  font-weight: 700;
+}
+
+.contact-ref__left h2 span {
+  display: inline-block;
+}
+
+.contact-ref__right {
+  align-self: center;
+}
+
+.contact-ref__identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-ref__identity strong,
+.contact-ref__identity span {
+  font-size: 0.9rem;
+}
+
+.contact-ref__identity span {
+  color: rgba(255,255,255,0.9);
+}
+
+.contact-ref__links {
+  display: grid;
+  border-top: 1px solid rgba(255,255,255,0.35);
+}
+
+.contact-ref__links a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  font-size: 0.86rem;
+  transition: opacity 220ms ease, transform 220ms var(--ease);
+}
+
+.contact-ref__links a:hover {
+  opacity: 0.72;
+  transform: translateX(3px);
+}
+
+.contact-ref__bar {
+  background: #07111b;
+}
+
+.contact-ref__bar-inner {
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.contact-ref__bar-inner span:nth-child(2) {
+  justify-self: center;
+}
+
+.contact-ref__bar-inner a {
+  justify-self: end;
+}
+
+@media (max-width: 900px) {
+  .contact-ref__main {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .contact-ref__left h2 {
+    max-width: 8ch;
+    font-size: clamp(3.3rem, 11vw, 5.8rem);
+  }
+
+  .contact-ref__right {
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 620px) {
+  .contact-ref__main {
+    gap: 4rem;
+  }
+
+  .contact-ref__left h2 {
+    font-size: clamp(3rem, 14vw, 4.6rem);
+  }
+
+  .contact-ref__bar-inner {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .contact-ref__bar-inner span:nth-child(2),
+  .contact-ref__bar-inner a {
+    justify-self: start;
+  }
+}
+
+
+/* =========================================================
+   SELECTED PROJECTS — editorial additions
+   Original site styles/animations remain untouched above.
+   ========================================================= */
+.projects-editorial {
+  background: #f5f5f5;
+  color: #111;
+  padding: clamp(7rem, 12vw, 12rem) 0;
+}
+.projects-editorial .section-heading { margin-bottom: clamp(5rem, 9vw, 9rem); }
+.projects-editorial__list { display: flex; flex-direction: column; gap: clamp(8rem, 14vw, 14rem); }
+
+.project-case { position: relative; }
+.project-case__image { margin: 0; overflow: hidden; background: #e9e9e9; }
+.project-case__image img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  transition: transform 900ms cubic-bezier(.2,.7,.2,1);
+}
+.project-case:hover .project-case__image img { transform: scale(1.018); }
+.project-case__label {
+  display: block; margin-bottom: 1.7rem; font-size: .68rem;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.project-case h3 {
+  margin: 0; font-size: clamp(4rem, 8vw, 8.8rem);
+  line-height: .82; letter-spacing: -.065em; font-weight: 700;
+}
+.project-case__lead {
+  max-width: 38rem; margin: 2rem 0 0;
+  font-size: clamp(1.15rem, 1.6vw, 1.55rem);
+  line-height: 1.28; letter-spacing: -.025em;
+}
+.project-case__facts { margin: 2.2rem 0 2.5rem; border-top: 1px solid #bbb; }
+.project-case__facts p {
+  margin: 0; padding: .8rem 0; border-bottom: 1px solid #d5d5d5;
+  font-size: .65rem; line-height: 1.5; letter-spacing: .09em; text-transform: uppercase;
+}
+.project-case__facts span { display: inline-block; width: 5.5rem; opacity: .45; }
+.project-case__link {
+  display: inline-flex; align-items: center; gap: 1rem;
+  color: inherit; text-decoration: none; border-bottom: 1px solid currentColor;
+  padding-bottom: .5rem; font-size: .68rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.project-case__link b { font-size: 1rem; font-weight: 400; }
+
+.project-case--split,
+.project-case--reverse {
+  display: grid; grid-template-columns: 1.2fr .8fr;
+  gap: clamp(3rem, 7vw, 7rem); align-items: center;
+}
+.project-case--split .project-case__image,
+.project-case--reverse .project-case__image { aspect-ratio: 1.12 / 1; }
+
+.project-case--reverse { grid-template-columns: .8fr 1.2fr; }
+.project-case--reverse .project-case__content { order: 1; }
+.project-case--reverse .project-case__image { order: 2; }
+
+.project-case__header {
+  display: grid; grid-template-columns: 1.15fr .85fr;
+  gap: 7vw; align-items: end; margin-bottom: 3rem;
+}
+.project-case--wide .project-case__image { aspect-ratio: 2.05 / 1; }
+.project-case__image--dark { background: #050505; padding: clamp(1rem, 2vw, 2rem); }
+.project-case__image--dark img,
+.project-case__image--contain img { object-fit: contain; }
+.project-case__image--contain { background: #fff; padding: clamp(1rem, 2vw, 2rem); }
+.project-case__link--under { margin-top: 1.5rem; }
+
+@media (max-width: 780px) {
+  .project-case--split, .project-case--reverse, .project-case__header {
+    grid-template-columns: 1fr;
+  }
+  .project-case--reverse .project-case__image { order: 1; }
+  .project-case--reverse .project-case__content { order: 2; }
+  .project-case--wide .project-case__image { aspect-ratio: 1.15 / 1; }
+}
+
+/* HERO PHOTO UPDATE */
+.hero .text-link{border-color:#8b1e3f!important;text-decoration-color:#8b1e3f!important}
+.hero .text-link::after{background:#8b1e3f!important}
+.hero__portrait{justify-self:end;align-self:stretch;width:100%;max-width:48vw;overflow:hidden;position:relative;z-index:1}
+.hero__portrait::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(13,27,42,1) 0%,rgba(13,27,42,.82) 7%,rgba(13,27,42,.35) 18%,rgba(13,27,42,0) 36%),linear-gradient(0deg,rgba(13,27,42,.30) 0%,rgba(13,27,42,0) 24%)}
+.hero__portrait img{width:100%;height:100%;object-fit:cover;object-position:68% center;display:block}
+.hero__name{position:relative;z-index:3}
+@media(max-width:900px){.hero__portrait{max-width:100%}.hero__portrait::before{background:linear-gradient(90deg,rgba(13,27,42,.65) 0%,rgba(13,27,42,0) 28%),linear-gradient(0deg,rgba(13,27,42,.25) 0%,rgba(13,27,42,0) 25%)}}
+
+
+/* HERO RIGHT ALIGNMENT + CV BUTTON INTERACTION */
+.hero__grid{
+  width:100%;
+  max-width:none;
+  padding-right:0;
+}
+.hero__portrait{
+  justify-self:end;
+  margin-right:0;
+  right:0;
+  max-width:50vw;
+}
+.hero__portrait img{
+  object-position:right center;
+}
+
+/* CV button turns burgundy with white type when clicked/pressed */
+.hero .button--secondary:active,
+.hero .button--secondary:focus{
+  background:#8b1e3f;
+  border-color:#8b1e3f;
+  color:#fff;
+}
+
+/* Keep the clicked state visible for keyboard users */
+.hero .button--secondary:focus-visible{
+  outline:2px solid #8b1e3f;
+  outline-offset:3px;
+}
+
+@media(max-width:900px){
+  .hero__grid{padding-right:0}
+  .hero__portrait{max-width:100%;margin-right:0}
+}
+
+.hero .button--secondary.is-downloaded{
+  background:#8b1e3f!important;
+  border-color:#8b1e3f!important;
+  color:#fff!important;
+}
+
+
+/* =========================================================
+   V6 HERO LAYOUT FIX
+   Preserve the ORIGINAL left gutter/container.
+   Only the portrait escapes to the right viewport edge.
+   ========================================================= */
+
+/* Restore the mother landing's left/right container behavior.
+   Do NOT remove the left gutter. */
+.hero__grid{
+  width: min(90vw, 1440px) !important;
+  max-width: 1440px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Send ONLY the portrait to the physical right edge of viewport. */
+.hero__portrait{
+  justify-self: end !important;
+  width: calc(100% + ((100vw - min(90vw, 1440px)) / 2)) !important;
+  max-width: none !important;
+  margin-right: calc(-1 * ((100vw - min(90vw, 1440px)) / 2)) !important;
+  overflow: hidden !important;
+}
+
+/* Keep final portrait aligned to right and preserve left fade. */
+.hero__portrait img{
+  object-position: right center !important;
+}
+
+/* Restore hero actions to their intended vertical composition:
+   Portfolio + CV on first row; Contact below. */
+.hero__actions{
+  display: grid !important;
+  grid-template-columns: max-content max-content !important;
+  justify-content: start !important;
+  align-items: start !important;
+  column-gap: 0.9rem !important;
+  row-gap: 0.85rem !important;
+}
+.hero__actions .text-link{
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  justify-self: start !important;
+  margin: 0 !important;
+}
+
+@media(max-width:900px){
+  .hero__grid{
+    width:min(90vw,1440px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .hero__portrait{
+    width:calc(100% + 5vw)!important;
+    margin-right:-5vw!important;
+  }
+}
+
+
+/* =========================================================
+   V7 HERO — right alignment + scroll cue over portrait
+   ========================================================= */
+
+/* Keep the original left gutter. Move only the image farther right,
+   aligning its right edge with the viewport edge / upper Services nav. */
+.hero__portrait{
+  width: calc(100% + ((100vw - min(90vw, 1440px)) / 2) + 1.25vw) !important;
+  margin-right: calc(-1 * (((100vw - min(90vw, 1440px)) / 2) + 1.25vw)) !important;
+}
+
+/* Place Scroll + vertical line on top of the portrait, near its right edge. */
+.hero__grid{position:relative!important}
+.hero .scroll-cue{
+  position:absolute!important;
+  right:calc(-1 * ((100vw - min(90vw, 1440px)) / 2) + 1.4rem)!important;
+  bottom:1.6rem!important;
+  z-index:6!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:.65rem!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  mix-blend-mode:normal!important;
+}
+.hero .scroll-cue span:first-child{
+  writing-mode:vertical-rl!important;
+  transform:rotate(180deg)!important;
+  font-size:.62rem!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+}
+.hero .scroll-cue__line{
+  display:block!important;
+  width:1px!important;
+  height:4.5rem!important;
+  background:rgba(255,255,255,.78)!important;
+}
+
+@media(max-width:900px){
+  .hero__portrait{
+    width:calc(100% + 5vw)!important;
+    margin-right:-5vw!important;
+  }
+  .hero .scroll-cue{
+    right:-3.2vw!important;
+    bottom:1rem!important;
+  }
+}
+
+
+/* =========================================================
+   V8 — FINAL HERO REFINEMENT
+   ========================================================= */
+
+/* Extend only the portrait farther to the right.
+   Left gutter and all hero text remain untouched. */
+.hero__portrait{
+  width: calc(100% + ((100vw - min(90vw, 1440px)) / 2) + 2.75vw) !important;
+  margin-right: calc(-1 * (((100vw - min(90vw, 1440px)) / 2) + 2.75vw)) !important;
+}
+
+/* CV button: burgundy on hover AND keep burgundy on click/focus/downloaded. */
+.hero .button--secondary:hover,
+.hero .button--secondary:active,
+.hero .button--secondary:focus,
+.hero .button--secondary.is-downloaded{
+  background:#8b1e3f !important;
+  border-color:#8b1e3f !important;
+  color:#fff !important;
+}
+
+/* Smooth visual transition without changing the button geometry. */
+.hero .button--secondary{
+  transition:background-color .25s ease, color .25s ease, border-color .25s ease !important;
+}
+
+@media(max-width:900px){
+  .hero__portrait{
+    width:calc(100% + 5vw)!important;
+    margin-right:-5vw!important;
+  }
+}
+
+
+/* =========================================================
+   V9 — ABOUT → JOURNEY SPACING
+   Same background and horizontal gutters; tighter transition.
+   ========================================================= */
+.about{
+  padding-bottom: clamp(3rem, 5vw, 5.5rem) !important;
+}
+.journey{
+  padding-top: clamp(3rem, 5vw, 5.5rem) !important;
+}
+
+@media(max-width:780px){
+  .about{padding-bottom:3.25rem!important}
+  .journey{padding-top:3.25rem!important}
+}
+
+
+/* =========================================================
+   V10 — SELECTED PROJECTS / SUPPER FIT
+   Editorial split based on approved reference.
+   Existing project link remains functional.
+   ========================================================= */
+
+/* First projects introduction: dark editorial block */
+.projects-editorial{
+  background:#0d1b2a !important;
+  color:#fff !important;
+  padding-top:clamp(6rem,9vw,9rem) !important;
+}
+.projects-editorial .section-heading{
+  min-height:clamp(280px,34vw,430px);
+  margin-bottom:0 !important;
+  display:grid;
+  grid-template-columns:180px 1fr;
+  align-content:center;
+  column-gap:clamp(2rem,5vw,6rem);
+}
+.projects-editorial .section-label{
+  color:#d05a78;
+  align-self:start;
+  padding-top:.7rem;
+}
+.projects-editorial .section-heading h2{
+  color:#fff;
+  max-width:800px;
+  margin:0 !important;
+  font-size:clamp(3.7rem,6vw,6.6rem);
+  line-height:.93;
+  letter-spacing:-.055em;
+}
+
+/* Project 01 becomes the two-panel composition from the reference. */
+.project-case--featured{
+  display:grid !important;
+  grid-template-columns:58% 42% !important;
+  gap:0 !important;
+  align-items:stretch !important;
+  margin-left:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  margin-right:calc(-1 * ((100vw - min(90vw,1440px))/2));
+}
+
+/* Left gray panel with Supper Fit brandboard */
+.project-case--featured .project-case__image--brandboard{
+  order:1;
+  aspect-ratio:auto !important;
+  min-height:clamp(500px,52vw,760px);
+  background:#c9c9c9 !important;
+  padding:clamp(2rem,4.5vw,5rem);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-right:1px solid rgba(255,255,255,.12);
+}
+.project-case--featured .project-case__image--brandboard img{
+  width:100%;
+  height:100%;
+  max-height:650px;
+  object-fit:contain !important;
+  transform:none !important;
+}
+
+/* Right dark case-study panel */
+.project-case--featured .project-case__content{
+  order:2;
+  position:relative;
+  background:#0b1825;
+  color:#fff;
+  padding:clamp(4rem,6vw,7rem) clamp(2.8rem,4vw,5rem);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.project-case--featured .project-case__content::before{
+  content:"01";
+  display:block;
+  color:#a91f43;
+  font-size:clamp(5rem,8vw,8.5rem);
+  line-height:.75;
+  font-weight:500;
+  letter-spacing:-.07em;
+  margin-bottom:2.4rem;
+}
+.project-case--featured .project-case__label{
+  color:#fff;
+  opacity:.72;
+  margin-bottom:1.1rem;
+}
+.project-case--featured h3{
+  color:#fff;
+  font-size:clamp(3.7rem,5.3vw,6.3rem);
+  line-height:.88;
+  letter-spacing:-.06em;
+}
+.project-case--featured .project-case__lead{
+  color:#fff;
+  max-width:36rem;
+  margin-top:1.7rem;
+}
+.project-case--featured .project-case__facts{
+  border-color:rgba(255,255,255,.24);
+}
+.project-case--featured .project-case__facts p{
+  border-color:rgba(255,255,255,.18);
+}
+.project-case--featured .project-case__link{
+  color:#fff !important;
+  border-color:#fff !important;
+  align-self:flex-start;
+}
+
+/* Start following projects on light background, so this dark opening reads as one chapter. */
+.project-case--featured ~ .project-case{
+  color:#111;
+}
+.projects-editorial__list{
+  position:relative;
+}
+.projects-editorial__list::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  right:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  top:clamp(500px,52vw,760px);
+  bottom:calc(-1 * clamp(7rem,12vw,12rem));
+  background:#f5f5f5;
+}
+.projects-editorial__list{z-index:0}
+.project-case--featured{z-index:1}
+.project-case--featured ~ .project-case{z-index:1}
+
+/* Make the gap after project 01 land on the light continuation */
+.project-case--featured + .project-case{
+  margin-top:clamp(7rem,11vw,11rem);
+}
+
+@media(max-width:800px){
+  .projects-editorial .section-heading{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding:4rem 0 5rem;
+    row-gap:1.5rem;
+  }
+  .project-case--featured{
+    grid-template-columns:1fr !important;
+    margin-left:-5vw;
+    margin-right:-5vw;
+  }
+  .project-case--featured .project-case__image--brandboard{
+    min-height:420px;
+  }
+  .project-case--featured .project-case__content{
+    padding:4rem 7vw;
+  }
+}
+
+
+/* =========================================================
+   V11 — PROJECT 02 / FALVANU
+   Dark editorial block based on supplied reference.
+   ========================================================= */
+
+.project-case--falvanu-featured{
+  position:relative;
+  background:#263747;
+  color:#fff !important;
+  min-height:clamp(520px,48vw,720px);
+  margin-top:0 !important;
+  margin-left:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  margin-right:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  padding:clamp(3rem,5vw,6rem) calc((100vw - min(90vw,1440px))/2);
+  display:grid;
+  grid-template-columns:48% 52%;
+  align-items:stretch;
+  gap:0;
+  border-top:1px solid rgba(255,255,255,.16);
+  border-bottom:1px solid rgba(255,255,255,.16);
+}
+
+/* Text side */
+.project-case--falvanu-featured .project-case__header{
+  grid-column:1;
+  grid-row:1;
+  display:flex !important;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+  margin:0 !important;
+  padding:0 clamp(2rem,4vw,5rem) 0 0;
+}
+.project-case--falvanu-featured .project-case__header > div:first-child{
+  width:100%;
+}
+.project-case--falvanu-featured .project-case__header > div:last-child{
+  width:100%;
+}
+.project-case--falvanu-featured .project-case__header::before{
+  content:"02";
+  color:#a91f43;
+  font-size:clamp(5rem,8vw,8.5rem);
+  line-height:.75;
+  font-weight:500;
+  letter-spacing:-.07em;
+  margin-bottom:auto;
+}
+.project-case--falvanu-featured .project-case__label{
+  color:rgba(255,255,255,.72);
+  margin-bottom:1rem;
+}
+.project-case--falvanu-featured h3{
+  color:#fff;
+  font-size:clamp(4rem,6vw,7rem);
+  line-height:.88;
+  margin-bottom:1.2rem;
+}
+.project-case--falvanu-featured .project-case__lead{
+  color:#fff;
+  font-size:clamp(1.15rem,1.55vw,1.45rem);
+  max-width:34rem;
+  margin-top:0;
+}
+.project-case--falvanu-featured .project-case__facts{
+  border-color:rgba(255,255,255,.25);
+  margin-bottom:1.8rem;
+}
+.project-case--falvanu-featured .project-case__facts p{
+  border-color:rgba(255,255,255,.18);
+}
+
+/* Brandboard occupies the right half on the same dark/gray editorial field. */
+.project-case--falvanu-featured .project-case__image{
+  grid-column:2;
+  grid-row:1;
+  aspect-ratio:auto !important;
+  min-height:100%;
+  margin:0;
+  background:#314252 !important;
+  border:1px solid rgba(255,255,255,.18);
+  padding:clamp(2rem,4vw,4.5rem);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.project-case--falvanu-featured .project-case__image img{
+  width:100%;
+  height:100%;
+  max-height:560px;
+  object-fit:contain !important;
+  transform:none !important;
+}
+.project-case--falvanu-featured .project-case__link{
+  position:absolute;
+  left:calc((100vw - min(90vw,1440px))/2);
+  bottom:clamp(3rem,5vw,5rem);
+  color:#fff !important;
+  border-color:#fff !important;
+  z-index:3;
+}
+
+/* Keep following project on the light continuation. */
+.project-case--falvanu-featured + .project-case{
+  margin-top:clamp(7rem,11vw,11rem);
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured{
+    grid-template-columns:1fr;
+    margin-left:-5vw;
+    margin-right:-5vw;
+    padding:4rem 5vw;
+  }
+  .project-case--falvanu-featured .project-case__header{
+    grid-column:1;
+    grid-row:1;
+    padding:0 0 3rem;
+  }
+  .project-case--falvanu-featured .project-case__header::before{
+    margin-bottom:4rem;
+  }
+  .project-case--falvanu-featured .project-case__image{
+    grid-column:1;
+    grid-row:2;
+    min-height:420px;
+  }
+  .project-case--falvanu-featured .project-case__link{
+    position:static;
+    margin-top:2rem;
+  }
+}
+
+
+/* =========================================================
+   V12 — PROJECT 02 FALVANU REFINEMENT
+   ========================================================= */
+
+/* Project 02 uses the same deep navy as Project 01 and joins it
+   without a visible vertical gap. */
+.project-case--falvanu-featured{
+  background:#0b1825 !important;
+  margin-top:0 !important;
+  border-top:0 !important;
+}
+
+/* Remove the list gap specifically between project 01 and 02. */
+.project-case--featured + .project-case--falvanu-featured{
+  margin-top:0 !important;
+}
+
+/* Override flex spacing inherited from the projects list. */
+.projects-editorial__list{
+  gap:0 !important;
+}
+.project-case--falvanu-featured + .project-case{
+  margin-top:clamp(7rem,11vw,11rem) !important;
+}
+
+/* Number 02 moves down to the project legend area,
+   matching the visual hierarchy used in Project 01. */
+.project-case--falvanu-featured .project-case__header{
+  justify-content:center !important;
+}
+.project-case--falvanu-featured .project-case__header::before{
+  margin-bottom:2.4rem !important;
+  margin-top:0 !important;
+}
+
+/* Give VIEW PROJECT the same breathing room as Project 01. */
+.project-case--falvanu-featured .project-case__link{
+  position:static !important;
+  margin-top:.8rem !important;
+  align-self:flex-start !important;
+}
+
+/* Keep facts/link grouped naturally in the left text panel. */
+.project-case--falvanu-featured .project-case__facts{
+  margin-bottom:2.5rem !important;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured .project-case__header::before{
+    margin-bottom:2.4rem !important;
+  }
+  .project-case--falvanu-featured .project-case__link{
+    margin-top:.8rem !important;
+  }
+}
+
+
+/* =========================================================
+   V13 — FINAL PROJECT 02 DETAILS
+   ========================================================= */
+
+/* Bring 02 directly next to its project legend. */
+.project-case--falvanu-featured .project-case__header::before{
+  margin-bottom:.55rem !important;
+}
+
+/* Underline only the VIEW PROJECT text width. */
+.project-case--falvanu-featured .project-case__link{
+  width:max-content !important;
+  display:inline-flex !important;
+  align-self:flex-start !important;
+  border-bottom:1px solid currentColor !important;
+  padding-bottom:.5rem !important;
+}
+
+
+/* V14 — precise Project 02 alignment */
+.project-case--falvanu-featured .project-case__header::before{
+  margin-bottom:0 !important;
+  transform:translateY(1.1rem) !important;
+}
+
+/* Raise VIEW PROJECT approximately 5% within the block */
+.project-case--falvanu-featured .project-case__link{
+  transform:translateY(-1.15rem) !important;
+}
+
+
+/* =========================================================
+   V15 — PROJECT 03 / NITRIC SURGE
+   Light text panel + gray image panel, following supplied reference.
+   ========================================================= */
+.project-case--falvanu-featured + .project-case{
+  margin-top:0 !important;
+}
+
+/* Project 03 split */
+.project-case--falvanu-featured + .project-case--wide{
+  margin-left:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  margin-right:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  background:#f5f5f5;
+  color:#111;
+  min-height:clamp(540px,48vw,720px);
+  display:grid;
+  grid-template-columns:49% 51%;
+  gap:0;
+  align-items:stretch;
+}
+
+/* Rebuild its header as the complete left editorial panel */
+.project-case--falvanu-featured + .project-case--wide .project-case__header{
+  grid-column:1;
+  grid-row:1;
+  display:flex !important;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  margin:0 !important;
+  padding:clamp(4rem,6vw,7rem)
+          clamp(3rem,5vw,6rem)
+          clamp(4rem,6vw,7rem)
+          calc((100vw - min(90vw,1440px))/2);
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  content:"03";
+  display:block;
+  color:#9f1f43;
+  font-size:clamp(5rem,8vw,8.5rem);
+  line-height:.75;
+  font-weight:500;
+  letter-spacing:-.07em;
+  margin-bottom:1.2rem;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__label{
+  color:#111;
+  opacity:.72;
+  margin-bottom:1.2rem;
+}
+.project-case--falvanu-featured + .project-case--wide h3{
+  color:#111;
+  font-size:clamp(3.7rem,5.4vw,6.5rem);
+  line-height:.88;
+  letter-spacing:-.06em;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__lead{
+  color:#111;
+  max-width:34rem;
+  margin-top:1.6rem;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__facts{
+  border-color:#bbb;
+  width:100%;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__facts p{
+  border-color:#d5d5d5;
+}
+
+/* Nitric Surge visual occupies right gray quadrant */
+.project-case--falvanu-featured + .project-case--wide .project-case__image{
+  grid-column:2;
+  grid-row:1;
+  aspect-ratio:auto !important;
+  min-height:100%;
+  margin:0;
+  padding:clamp(2rem,4vw,5rem);
+  background:#d2d2d2 !important;
+  border-left:1px solid #bcbcbc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__image img{
+  width:100%;
+  height:100%;
+  max-height:590px;
+  object-fit:contain !important;
+  transform:none !important;
+}
+
+/* View Project sits with the text, visually aligned like the reference */
+.project-case--falvanu-featured + .project-case--wide .project-case__link{
+  position:absolute;
+  left:calc((100vw - min(90vw,1440px))/2);
+  bottom:clamp(3rem,4vw,4.5rem);
+  width:max-content;
+  color:#111 !important;
+  border-color:#111 !important;
+  z-index:4;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide{
+    grid-template-columns:1fr;
+    margin-left:-5vw;
+    margin-right:-5vw;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__header{
+    grid-column:1;
+    grid-row:1;
+    padding:4rem 5vw;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__image{
+    grid-column:1;
+    grid-row:2;
+    min-height:420px;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__link{
+    position:static;
+    grid-column:1;
+    grid-row:3;
+    margin:1.5rem 5vw 4rem;
+  }
+}
+
+
+/* =========================================================
+   V16 — PROJECT 03 FINAL COMPOSITION
+   Number + label + title + supporting copy behave as one text block.
+   ========================================================= */
+
+/* Lower the complete left content block and keep all copy together. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header{
+  justify-content:flex-start !important;
+  padding-top:clamp(7rem,10vw,10rem) !important;
+  padding-bottom:clamp(4rem,6vw,6rem) !important;
+}
+
+/* 03 now sits directly with the project legend, as one editorial unit. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  margin:0 0 .35rem 0 !important;
+  transform:none !important;
+}
+
+/* Tighten the internal hierarchy so number, legend and title read together. */
+.project-case--falvanu-featured + .project-case--wide .project-case__label{
+  margin:0 0 1.05rem 0 !important;
+}
+.project-case--falvanu-featured + .project-case--wide h3{
+  margin:0 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__lead{
+  margin-top:1.25rem !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__facts{
+  margin-top:1.8rem !important;
+  margin-bottom:2.1rem !important;
+}
+
+/* Bring View Project into the same left content block instead of floating low. */
+.project-case--falvanu-featured + .project-case--wide .project-case__link{
+  position:absolute !important;
+  left:calc((100vw - min(90vw,1440px))/2) !important;
+  bottom:clamp(3.5rem,5vw,5rem) !important;
+  width:max-content !important;
+}
+
+/* New Project 03 image: fill the right panel more strongly. */
+.project-case--falvanu-featured + .project-case--wide .project-case__image{
+  padding:0 !important;
+  background:#202326 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__image img{
+  width:100% !important;
+  height:100% !important;
+  max-height:none !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide .project-case__header{
+    padding-top:4.5rem !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__link{
+    position:static !important;
+    margin:0 5vw 4rem !important;
+  }
+}
+
+
+/* =========================================================
+   V17 — PROJECT 03 TIGHT TYPOGRAPHY + NEW LABEL ARTWORK
+   ========================================================= */
+
+/* Tighten 03 → legend → Nitric Surge → description into one unit. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  margin-bottom:0 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__label{
+  margin-top:0 !important;
+  margin-bottom:.35rem !important;
+}
+.project-case--falvanu-featured + .project-case--wide h3{
+  margin:0 !important;
+  line-height:.84 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__lead{
+  margin-top:.55rem !important;
+}
+
+/* New horizontal label artwork: show the full design without cropping. */
+.project-case--falvanu-featured + .project-case--wide .project-case__image{
+  background:#a6a6a6 !important;
+  padding:clamp(1.5rem,3vw,3.5rem) !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__image img{
+  width:100% !important;
+  height:auto !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+}
+
+
+/* =========================================================
+   V18 — PROJECT 03 / COMPACT TEXT BLOCK
+   03 + legend + title + description now read as one unit.
+   The reduced vertical rhythm also makes the image block shorter.
+   ========================================================= */
+
+.project-case--falvanu-featured + .project-case--wide{
+  min-height:clamp(430px,39vw,590px) !important;
+}
+
+.project-case--falvanu-featured + .project-case--wide .project-case__header{
+  justify-content:center !important;
+  padding-top:clamp(3.5rem,5vw,5rem) !important;
+  padding-bottom:clamp(3.5rem,5vw,5rem) !important;
+}
+
+/* 03 attached to the project legend */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  margin:0 0 .05rem 0 !important;
+  line-height:.72 !important;
+}
+
+/* Legend attached to title */
+.project-case--falvanu-featured + .project-case--wide .project-case__label{
+  margin:0 0 .45rem 0 !important;
+  line-height:1.05 !important;
+}
+
+/* Compact title leading */
+.project-case--falvanu-featured + .project-case--wide h3{
+  margin:0 !important;
+  line-height:.78 !important;
+}
+
+/* Description attached to title */
+.project-case--falvanu-featured + .project-case--wide .project-case__lead{
+  margin:.45rem 0 0 0 !important;
+  line-height:1.18 !important;
+}
+
+/* Metadata follows the same compact block */
+.project-case--falvanu-featured + .project-case--wide .project-case__facts{
+  margin-top:1.15rem !important;
+  margin-bottom:1.45rem !important;
+}
+
+/* Keep the label artwork proportionally contained in the shorter panel */
+.project-case--falvanu-featured + .project-case--wide .project-case__image{
+  min-height:0 !important;
+  padding:clamp(1.25rem,2.4vw,2.75rem) !important;
+}
+
+.project-case--falvanu-featured + .project-case--wide .project-case__link{
+  bottom:clamp(2rem,3vw,3rem) !important;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide{
+    min-height:auto !important;
+  }
+}
+
+
+/* =========================================================
+   V19 — PROJECT 03 / NEW HORIZONTAL EDITORIAL COMPOSITION
+   Title left above image / 03 right above image /
+   legend + supporting information below image.
+   ========================================================= */
+
+.project-case--falvanu-featured + .project-case--wide{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  grid-template-rows:auto auto auto !important;
+  background:#f5f5f5 !important;
+  color:#111 !important;
+  min-height:auto !important;
+  padding:clamp(5rem,7vw,7.5rem)
+          calc((100vw - min(90vw,1440px))/2) !important;
+}
+
+/* Header spans full width and becomes the upper typography zone. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header{
+  grid-column:1 !important;
+  grid-row:1 !important;
+  width:100% !important;
+  padding:0 !important;
+  margin:0 0 clamp(2rem,3vw,3rem) 0 !important;
+  display:grid !important;
+  grid-template-columns:1fr auto !important;
+  grid-template-rows:auto auto !important;
+  gap:0 !important;
+  align-items:end !important;
+}
+
+/* First inner div contains label + title. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+  grid-column:1 !important;
+  grid-row:1 !important;
+  align-self:end !important;
+  max-width:720px !important;
+}
+
+/* Move the 03 to the upper-right, aligned with the horizontal image. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  content:"03" !important;
+  grid-column:2 !important;
+  grid-row:1 !important;
+  align-self:end !important;
+  justify-self:end !important;
+  margin:0 !important;
+  color:#9f1f43 !important;
+  font-size:clamp(5.5rem,8vw,9rem) !important;
+  line-height:.68 !important;
+  letter-spacing:-.07em !important;
+}
+
+/* Title left. */
+.project-case--falvanu-featured + .project-case--wide h3{
+  margin:0 !important;
+  max-width:700px !important;
+  font-size:clamp(4rem,6vw,7rem) !important;
+  line-height:.82 !important;
+  color:#111 !important;
+}
+
+/* Hide the label above the title; it will be visually placed below the image. */
+.project-case--falvanu-featured + .project-case--wide .project-case__label{
+  position:absolute !important;
+  left:-9999px !important;
+}
+
+/* Supporting copy container moves below the image. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+  grid-column:1 / -1 !important;
+  grid-row:2 !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+/* Horizontal artwork in the middle of the block. */
+.project-case--falvanu-featured + .project-case--wide .project-case__image{
+  grid-column:1 !important;
+  grid-row:2 !important;
+  width:100% !important;
+  aspect-ratio:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:clamp(1.5rem,2.5vw,2.5rem) !important;
+  background:#a6a6a6 !important;
+  border:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__image img{
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+}
+
+/* Build a clean information strip under the image. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+  position:absolute !important;
+  left:calc((100vw - min(90vw,1440px))/2) !important;
+  right:calc((100vw - min(90vw,1440px))/2) !important;
+  bottom:clamp(5rem,7vw,7.5rem) !important;
+  transform:translateY(calc(100% + 2rem)) !important;
+}
+
+/* Reserve room below the image for legend/copy. */
+.project-case--falvanu-featured + .project-case--wide{
+  padding-bottom:clamp(12rem,16vw,16rem) !important;
+}
+
+/* Recreate the project legend below the image. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child::before{
+  content:"03 / PACKAGING · ART DIRECTION · ADVERTISING";
+  display:block;
+  margin-bottom:1rem;
+  font-size:.68rem;
+  line-height:1.1;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#111;
+}
+
+/* Description below legend, with metadata alongside/below. */
+.project-case--falvanu-featured + .project-case--wide .project-case__lead{
+  margin:0 !important;
+  max-width:640px !important;
+  line-height:1.25 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__facts{
+  max-width:640px !important;
+  margin:1.5rem 0 0 !important;
+}
+
+/* View project aligned under the lower information strip. */
+.project-case--falvanu-featured + .project-case--wide .project-case__link{
+  left:auto !important;
+  right:calc((100vw - min(90vw,1440px))/2) !important;
+  bottom:clamp(5rem,7vw,7.5rem) !important;
+  position:absolute !important;
+  width:max-content !important;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide{
+    padding:4rem 5vw 5rem !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__header{
+    grid-template-columns:1fr auto !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+    position:static !important;
+    transform:none !important;
+    grid-column:1/-1 !important;
+    grid-row:3 !important;
+    margin-top:2rem !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__image{
+    grid-row:2 !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__link{
+    position:static !important;
+    margin-top:2rem !important;
+  }
+}
+
+
+/* =========================================================
+   V20 — PROJECT 03 FINAL
+   Legend attached to image + artwork enlarged to eliminate
+   the double-gray frame.
+   ========================================================= */
+
+/* Image artwork fills its panel: no secondary gray surround. */
+.project-case--falvanu-featured + .project-case--wide .project-case__image{
+  padding:0 !important;
+  background:#a6a6a6 !important;
+  overflow:hidden !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__image img{
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+/* Pull the lower legend/information upward so it reads attached to the image. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+  transform:translateY(calc(100% + .45rem)) !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child::before{
+  margin-bottom:.55rem !important;
+}
+
+/* Reduce the reserved whitespace below accordingly. */
+.project-case--falvanu-featured + .project-case--wide{
+  padding-bottom:clamp(10rem,13vw,13rem) !important;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+    transform:none !important;
+    margin-top:.65rem !important;
+  }
+}
+
+
+/* =========================================================
+   V21 — PROJECT 04 / EDUCATION BRANDS
+   Navy split composition + 3-design social carousel.
+   ========================================================= */
+.project-case--education-featured{
+  margin-left:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  margin-right:calc(-1 * ((100vw - min(90vw,1440px))/2));
+  background:#0b1825;
+  color:#fff;
+  display:grid;
+  grid-template-columns:58% 42%;
+  gap:0;
+  min-height:clamp(560px,52vw,780px);
+  align-items:stretch;
+}
+.project-case--education-featured .project-case__content{
+  order:2;
+  background:#0b1825;
+  padding:clamp(4rem,6vw,7rem) clamp(2.8rem,4vw,5rem);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.project-case--education-featured .project-case__number{
+  display:block;
+  color:#a91f43;
+  font-size:clamp(5rem,8vw,8.5rem);
+  line-height:.72;
+  font-weight:500;
+  letter-spacing:-.07em;
+  margin-bottom:.35rem;
+}
+.project-case--education-featured .project-case__label{color:rgba(255,255,255,.74);margin-bottom:1rem}
+.project-case--education-featured h3{
+  color:#fff;
+  font-size:clamp(3.8rem,5.4vw,6.4rem);
+  line-height:.86;
+  letter-spacing:-.06em;
+}
+.project-case--education-featured .project-case__lead{color:#fff;max-width:36rem;margin-top:1.3rem}
+.project-case--education-featured .project-case__facts{border-color:rgba(255,255,255,.24)}
+.project-case--education-featured .project-case__facts p{border-color:rgba(255,255,255,.18)}
+.project-case--education-featured .project-case__link{
+  color:#fff!important;border-color:#fff!important;width:max-content;align-self:flex-start;
+}
+
+/* Carousel left side */
+.project-case__education-carousel{
+  order:1;
+  position:relative;
+  min-width:0;
+  background:#c8c8c8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:clamp(2.2rem,4vw,5rem);
+}
+.education-carousel__viewport{width:100%;height:100%;overflow:hidden}
+.education-carousel__track{
+  height:100%;
+  display:flex;
+  transition:transform .65s cubic-bezier(.2,.7,.2,1);
+}
+.education-carousel__slide{
+  min-width:100%;
+  height:100%;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.education-carousel__slide img{
+  display:block;
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  box-shadow:0 18px 50px rgba(0,0,0,.13);
+}
+.education-carousel__button{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:4;
+  width:42px;height:42px;
+  border:1px solid rgba(13,27,42,.25);
+  background:rgba(245,245,245,.9);
+  color:#0d1b2a;
+  cursor:pointer;
+  font-size:18px;
+}
+.education-carousel__button--prev{left:1.1rem}
+.education-carousel__button--next{right:1.1rem}
+.education-carousel__dots{
+  position:absolute;
+  left:50%;bottom:1.25rem;
+  transform:translateX(-50%);
+  z-index:4;
+  display:flex;gap:.55rem;
+}
+.education-carousel__dots button{
+  width:7px;height:7px;padding:0;border:0;border-radius:50%;
+  background:rgba(13,27,42,.32);cursor:pointer;
+}
+.education-carousel__dots button.is-active{background:#8b1e3f}
+
+@media(max-width:800px){
+  .project-case--education-featured{
+    grid-template-columns:1fr;
+    margin-left:-5vw;margin-right:-5vw;
+  }
+  .project-case__education-carousel{min-height:520px}
+  .project-case--education-featured .project-case__content{padding:4rem 7vw}
+}
+
+
+/* =========================================================
+   V22 — PROJECT 03/04 SPACING + SECTION ORDER REFINEMENT
+   ========================================================= */
+
+/* PROJECT 03: move the lower Role/Focus information upward and
+   keep it fully inside its own light project block. */
+.project-case--falvanu-featured + .project-case--wide{
+  position:relative !important;
+  padding-bottom:clamp(11.5rem,14vw,14rem) !important;
+  z-index:2 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+  bottom:clamp(6.5rem,8vw,8.5rem) !important;
+  transform:translateY(calc(100% + .15rem)) !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__facts{
+  margin-top:.8rem !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__link{
+  bottom:clamp(4.5rem,6vw,6rem) !important;
+}
+
+/* PROJECT 04: start after Project 03 has completely finished.
+   Remove the full-viewport negative bleed that was climbing over 03. */
+.project-case--education-featured{
+  position:relative !important;
+  z-index:1 !important;
+  margin-top:clamp(1.5rem,2.5vw,2.75rem) !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  width:100% !important;
+}
+
+/* Keep Role + Focus clearly visible on Project 04. */
+.project-case--education-featured .project-case__facts{
+  display:block !important;
+  margin-top:1.4rem !important;
+  margin-bottom:1.7rem !important;
+  color:#fff !important;
+}
+.project-case--education-featured .project-case__facts p{
+  display:grid !important;
+  grid-template-columns:5.5rem 1fr !important;
+  padding:.75rem 0 !important;
+  color:#fff !important;
+}
+.project-case--education-featured .project-case__facts span{
+  color:rgba(255,255,255,.55) !important;
+}
+
+/* Journey now follows the complete Projects section. */
+#projects{padding-bottom:0 !important;}
+#journey{margin-top:0 !important;}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide{
+    padding-bottom:5rem !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+    position:static !important;
+    transform:none !important;
+    margin-top:.65rem !important;
+  }
+  .project-case--education-featured{
+    margin-top:1rem !important;
+  }
+}
+
+
+/* =========================================================
+   V23 — PROJECT 04 / 10% VERTICAL BREATHING SPACE
+   Extra space above prevents overlap with Project 03.
+   Extra space below separates Project 04 from Journey.
+   ========================================================= */
+.project-case--education-featured{
+  margin-top:10vh !important;
+  margin-bottom:10vh !important;
+}
+
+/* Keep the project content comfortably inside the block as well. */
+.project-case--education-featured .project-case__content{
+  padding-top:clamp(5rem,10vh,8rem) !important;
+  padding-bottom:clamp(5rem,10vh,8rem) !important;
+}
+
+/* Make sure Journey starts only after the Project 04 breathing space. */
+#journey{
+  clear:both !important;
+}
+
+@media(max-width:800px){
+  .project-case--education-featured{
+    margin-top:10vw !important;
+    margin-bottom:10vw !important;
+  }
+}
+
+
+/* =========================================================
+   V24 — PROJECT 04 / 20% EXTERNAL BREATHING SPACE
+   Remove the extra internal carousel/image breathing room.
+   ========================================================= */
+
+/* 20% separation above and below Project 04 */
+.project-case--education-featured{
+  margin-top:20vh !important;
+  margin-bottom:20vh !important;
+}
+
+/* Undo V23 extra internal vertical padding on the text panel */
+.project-case--education-featured .project-case__content{
+  padding-top:clamp(4rem,6vw,7rem) !important;
+  padding-bottom:clamp(4rem,6vw,7rem) !important;
+}
+
+/* Carousel/image: remove added internal air so artwork uses the visual area */
+.project-case__education-carousel{
+  padding:0 !important;
+}
+.education-carousel__viewport,
+.education-carousel__track,
+.education-carousel__slide{
+  width:100% !important;
+  height:100% !important;
+}
+.education-carousel__slide img{
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:cover !important;
+  box-shadow:none !important;
+}
+
+@media(max-width:800px){
+  .project-case--education-featured{
+    margin-top:20vw !important;
+    margin-bottom:20vw !important;
+  }
+}
+
+
+/* =========================================================
+   V25 — PROJECT 03 NEW SAFE EDITORIAL FLOW
+   Text above / 03 burgundy left / image center /
+   View Project below-left. No absolute lower text overlap.
+   ========================================================= */
+.project-case--falvanu-featured + .project-case--wide{
+  display:flex !important;
+  flex-direction:column !important;
+  position:relative !important;
+  min-height:auto !important;
+  padding:clamp(5rem,7vw,7rem)
+          calc((100vw - min(90vw,1440px))/2)
+          clamp(5rem,7vw,7rem) !important;
+  background:#f5f5f5 !important;
+}
+
+/* Upper editorial text zone */
+.project-case--falvanu-featured + .project-case--wide .project-case__header{
+  display:grid !important;
+  grid-template-columns:1fr auto !important;
+  grid-template-rows:auto !important;
+  width:100% !important;
+  padding:0 !important;
+  margin:0 0 clamp(2.2rem,3vw,3.2rem) !important;
+  position:relative !important;
+}
+
+/* Title/copy all remain in normal flow */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+  grid-column:1 !important;
+  grid-row:1 !important;
+  max-width:760px !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+  position:static !important;
+  grid-column:1 / -1 !important;
+  grid-row:2 !important;
+  transform:none !important;
+  left:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  max-width:760px !important;
+  margin-top:1.25rem !important;
+}
+
+/* 03 burgundy, top-left justified */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  content:"03" !important;
+  grid-column:1 !important;
+  grid-row:1 !important;
+  justify-self:start !important;
+  align-self:start !important;
+  position:static !important;
+  color:#9f1f43 !important;
+  font-size:clamp(5.5rem,8vw,9rem) !important;
+  line-height:.7 !important;
+  margin:0 0 1.3rem !important;
+}
+
+/* Push title below number, while retaining left alignment */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+  padding-top:clamp(6rem,8vw,9rem) !important;
+}
+.project-case--falvanu-featured + .project-case--wide h3{
+  margin:0 !important;
+  color:#111 !important;
+  line-height:.84 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__lead{
+  margin:.7rem 0 0 !important;
+  line-height:1.25 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__facts{
+  margin:.8rem 0 0 !important;
+}
+
+/* Image centered, full horizontal artwork */
+.project-case--falvanu-featured + .project-case--wide .project-case__image{
+  order:2 !important;
+  position:relative !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:#a6a6a6 !important;
+  overflow:hidden !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__image img{
+  width:100% !important;
+  height:auto !important;
+  object-fit:cover !important;
+  display:block !important;
+}
+
+/* View Project directly below image, left aligned */
+.project-case--falvanu-featured + .project-case--wide .project-case__link{
+  order:3 !important;
+  position:static !important;
+  align-self:flex-start !important;
+  width:max-content !important;
+  margin-top:1.6rem !important;
+  transform:none !important;
+}
+
+/* =========================================================
+   V25 — PROJECT 04 REFINEMENT
+   Dark navy text side + page bleed + lighter carousel field.
+   Images reduced ~15% on each side.
+   ========================================================= */
+.project-case--education-featured{
+  background:#0b1825 !important;
+  margin-top:20vh !important;
+  margin-bottom:20vh !important;
+  margin-left:calc(-1 * ((100vw - min(90vw,1440px))/2)) !important;
+  margin-right:calc(-1 * ((100vw - min(90vw,1440px))/2)) !important;
+  width:auto !important;
+}
+.project-case--education-featured .project-case__content{
+  background:#0b1825 !important;
+  color:#fff !important;
+}
+
+/* Lighter carousel background and 15% breathing room on both sides */
+.project-case__education-carousel{
+  background:#dedede !important;
+  padding:0 15% !important;
+}
+.education-carousel__viewport{
+  width:100% !important;
+  height:100% !important;
+  overflow:hidden !important;
+}
+.education-carousel__slide{
+  padding:4% 0 !important;
+  box-sizing:border-box !important;
+}
+.education-carousel__slide img{
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  box-shadow:none !important;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide{
+    padding:4rem 5vw !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+    padding-top:6rem !important;
+  }
+  .project-case--education-featured{
+    margin-left:-5vw !important;
+    margin-right:-5vw !important;
+    margin-top:20vw !important;
+    margin-bottom:20vw !important;
+  }
+  .project-case__education-carousel{
+    padding:0 10% !important;
+  }
+}
+
+
+/* =========================================================
+   V26 — PROJECT 03 TYPOGRAPHY RESTORED TO REFERENCE
+   03 above title, left aligned; description + Role/Focus right.
+   Project 04 external vertical breathing reduced 5% (20 -> 15).
+   ========================================================= */
+
+/* Project 03: restore the editorial two-column text composition */
+.project-case--falvanu-featured + .project-case--wide .project-case__header{
+  display:grid !important;
+  grid-template-columns:minmax(0,58%) minmax(280px,42%) !important;
+  grid-template-rows:auto !important;
+  column-gap:clamp(2.5rem,5vw,6rem) !important;
+  align-items:end !important;
+  margin-bottom:clamp(2rem,3vw,3rem) !important;
+}
+
+/* Left side: 03 + legend + Nitric Surge */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  content:"03" !important;
+  position:absolute !important;
+  top:0 !important;
+  left:0 !important;
+  margin:0 !important;
+  color:#9f1f43 !important;
+  font-size:clamp(5.5rem,8vw,9rem) !important;
+  line-height:.68 !important;
+  letter-spacing:-.07em !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+  grid-column:1 !important;
+  grid-row:1 !important;
+  padding-top:clamp(7rem,9vw,10rem) !important;
+  max-width:none !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__label{
+  position:static !important;
+  left:auto !important;
+  display:block !important;
+  margin:0 0 1.2rem !important;
+  color:#111 !important;
+}
+.project-case--falvanu-featured + .project-case--wide h3{
+  margin:0 !important;
+  font-size:clamp(4rem,6.2vw,7.2rem) !important;
+  line-height:.84 !important;
+}
+
+/* Right side: description + Role / Focus, as in supplied reference */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+  grid-column:2 !important;
+  grid-row:1 !important;
+  align-self:end !important;
+  position:static !important;
+  transform:none !important;
+  max-width:none !important;
+  margin:0 0 .2rem !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child::before{
+  content:none !important;
+  display:none !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__lead{
+  margin:0 0 1.6rem !important;
+  font-size:clamp(1.1rem,1.45vw,1.45rem) !important;
+  line-height:1.2 !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__facts{
+  margin:0 !important;
+}
+
+/* Keep image centered and View Project below-left from V25 */
+.project-case--falvanu-featured + .project-case--wide .project-case__link{
+  position:static !important;
+  align-self:flex-start !important;
+  margin-top:1.6rem !important;
+}
+
+/* Project 04: 5% less than V25, i.e. 15% external spacing */
+.project-case--education-featured{
+  margin-top:15vh !important;
+  margin-bottom:15vh !important;
+}
+
+@media(max-width:800px){
+  .project-case--falvanu-featured + .project-case--wide .project-case__header{
+    grid-template-columns:1fr !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+    grid-column:1 !important;
+    grid-row:1 !important;
+  }
+  .project-case--falvanu-featured + .project-case--wide .project-case__header > div:last-child{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    margin-top:1.5rem !important;
+  }
+  .project-case--education-featured{
+    margin-top:15vw !important;
+    margin-bottom:15vw !important;
+  }
+}
+
+
+/* =========================================================
+   V27 — FINAL PROJECT NUMBER RHYTHM
+   One consistent number → title rhythm across Projects 01–04.
+   Project 04 top external spacing = 10%; bottom stays 15%.
+   ========================================================= */
+
+:root{
+  --project-number-title-gap:.85rem;
+}
+
+/* 01 — Supper Fit */
+.project-case--featured .project-case__header::before,
+.project-case--featured .project-case__number{
+  margin-bottom:var(--project-number-title-gap) !important;
+  line-height:.70 !important;
+}
+
+/* 02 — Falvanu */
+.project-case--falvanu-featured .project-case__header::before,
+.project-case--falvanu-featured .project-case__number{
+  margin-bottom:var(--project-number-title-gap) !important;
+  transform:none !important;
+  line-height:.70 !important;
+}
+
+/* 03 — Nitric Surge */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  margin-bottom:var(--project-number-title-gap) !important;
+  line-height:.70 !important;
+}
+/* Normalize the space occupied by 03 before its legend/title group. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+  padding-top:clamp(7rem,9vw,10rem) !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__label{
+  margin-bottom:.85rem !important;
+}
+
+/* 04 — Education Brands */
+.project-case--education-featured .project-case__number{
+  margin-bottom:var(--project-number-title-gap) !important;
+  line-height:.70 !important;
+}
+.project-case--education-featured .project-case__label{
+  margin-bottom:.85rem !important;
+}
+
+/* Requested final external spacing for Project 04 */
+.project-case--education-featured{
+  margin-top:10vh !important;
+  margin-bottom:15vh !important;
+}
+
+@media(max-width:800px){
+  .project-case--education-featured{
+    margin-top:10vw !important;
+    margin-bottom:15vw !important;
+  }
+}
+
+
+/* =========================================================
+   V28 — FINAL HEADER / PROJECT NUMBER SPACING / P04 / WHATSAPP
+   ========================================================= */
+
+/* Project 04: no external spacing above. Keep lower separation from Journey. */
+.project-case--education-featured{
+  margin-top:0 !important;
+  margin-bottom:15vh !important;
+}
+
+/* ---------------------------------------------------------
+   SAME RHYTHM FOR ALL LARGE BURGUNDY PROJECT NUMBERS:
+   exactly 3% visual separation before the title information.
+   --------------------------------------------------------- */
+
+/* 01 */
+.project-case--featured .project-case__header::before,
+.project-case--featured .project-case__number{
+  margin:0 0 3% 0 !important;
+  line-height:.70 !important;
+  transform:none !important;
+}
+
+/* 02 */
+.project-case--falvanu-featured .project-case__header::before,
+.project-case--falvanu-featured .project-case__number{
+  margin:0 0 3% 0 !important;
+  line-height:.70 !important;
+  transform:none !important;
+}
+
+/* 03: because its number is positioned above the title composition,
+   normalize its actual occupied vertical distance to the same 3% rhythm. */
+.project-case--falvanu-featured + .project-case--wide .project-case__header::before{
+  margin:0 !important;
+  line-height:.70 !important;
+  transform:none !important;
+}
+.project-case--falvanu-featured + .project-case--wide .project-case__header > div:first-child{
+  padding-top:calc(clamp(5.5rem,8vw,9rem) * .70 + 3%) !important;
+}
+
+/* 04 */
+.project-case--education-featured .project-case__number{
+  margin:0 0 3% 0 !important;
+  line-height:.70 !important;
+  transform:none !important;
+}
+
+/* Keep label/title spacing itself neutral so the number spacing is what
+   controls the rhythm consistently. */
+.project-case--featured .project-case__label,
+.project-case--falvanu-featured .project-case__label,
+.project-case--education-featured .project-case__label{
+  margin-top:0 !important;
+}
+
+@media(max-width:800px){
+  .project-case--education-featured{
+    margin-top:0 !important;
+    margin-bottom:15vw !important;
+  }
+}
+
+
